@@ -26,8 +26,7 @@ var UIController = (function () {
         /*
         var numSplit,int,dec;
             numSplit = num.split('.');
-            int = numSplit[0];
-            dec = numSplit[1];
+            [int,dec] = ...numSplit;
 
             if(int.length > 3)
             {
@@ -142,10 +141,8 @@ var UIController = (function () {
             document.querySelector(DOMstring.incomeLabel).textContent = '+'+format(budget.totalInc);
             document.querySelector(DOMstring.expensesLabel).textContent = '-'+format(budget.totalExp);
 
-            if (budget.percentage >= 0 && budget.percentage <= 999)
-                document.querySelector(DOMstring.percentageLabel).textContent = budget.percentage + '%';
-            else
-                document.querySelector(DOMstring.percentageLabel).textContent = '---';
+            document.querySelector(DOMstring.percentageLabel).textContent = (budget.percentage >= 0 && budget.percentage <= 999) ?
+                budget.percentage + '%' : '---';
         },
 
         displayPercentages: function (percentages) {
@@ -154,13 +151,9 @@ var UIController = (function () {
             // It return nodeList
 
             nodeListForEach(fields, function (current, index) {
-                if (percentages[index] >= 0 && percentages[index] <= 999)
-                    current.textContent = percentages[index] + '%';
-                else
-                    current.textContent = '---';
+                current.textContent = (percentages[index] >= 0 && percentages[index] <= 999) ?  
+                percentages[index] + '%' : current.textContent = '---';
             });
-
-            console.log(percentages);
         },
 
         displayDate: function () {

@@ -21,79 +21,14 @@ Display current month and year - UI
 Number formatting - UI
 Improve UI input element - UI
 */
-// Module Approch
-// Data encapsulation - in each of these modules, we'll have variables and functions that are private, which means that
-// they are only accessible inside of the module.We want it so that no other code can override our data.
-// And beside private variables and methods, we're also gonna have public methods, which means that
-// we expose them to the public so that other functions or modules can access and use them. And this is called data encapsulation.
-
-// So data encapsulation allows us to hide the implementation details of a specific module from the outside scope so that 
-// we only expose a public interface which is sometimes called an API.
-
-// IIFE - Anonymous function wrapped in parenthesis which is then immediately executed or invoked.
-
-/*
-var budgetController = (function(){
-    var x = 23;
-    var add = function(a){
-        return x+a;
-    }
-
-    return {
-        publicTest : function(b){
-            return add(b); // Power of Closure
-        },
-        anotherPublic : function(b){
-            console.log(add(b));
-        }
-    };
-
-}) ()
-
-budgetController.anotherPublic(10);
-
-// After the function has been executed due to power of closure we can still access variables and methods of outer function
-// In this way modules are created and these variables and method can be access only by public methods we return
-
-
-var UIController = (function(){
-
-    return {};
-})();
-
-
-// Separation of concerns - each part of the application should only be interested in doing one thing independently.
-
-// Although we have access to budgetController and appController in appController as they are of outer scope
-// But it is good practice to pass it as argument in case we change name of module later
-// Just making appController a little bit independent
-
-var myController = (function(){
-    budgetController.anotherPublic(11);
-})();
-
-var appController = (function(budgetCtrl,UICtrl){
-
-    var z = budgetCtrl.publicTest(12);
-    return {
-        anotherPublic : function(){
-            console.log(z);
-        }
-    };
-
-})(budgetController,UIController);
-
-appController.anotherPublic();
-*/
 
 // GLOBAL APP CONTROLLER
-var controller = (function (budgetCtrl, UICtrl) {
+const controller = ((budgetCtrl, UICtrl) => {
 
-    var setupEventListeners = function () {
-
-        var DOMstring = UICtrl.getDOMstring();
-
-        var btn = document.querySelector(DOMstring.inputBtn);
+        const setupEventListeners = () => {
+        
+        const DOMstring = UICtrl.getDOMstring();
+        const btn = document.querySelector(DOMstring.inputBtn);
         btn.addEventListener('click', ctrlAddItem);
 
         // KeyboardEvent UIEvent Event
@@ -101,8 +36,8 @@ var controller = (function (budgetCtrl, UICtrl) {
         // keydown  , keypress (except Shift, Fn, or CapsLock)  - Any key Fired continously
         // keyup
 
-        var changeType = document.querySelector(DOMstring.inputType);
-        document.addEventListener('keypress', function (event) {
+        const changeType = document.querySelector(DOMstring.inputType);
+        document.addEventListener('keypress', event => {
 
             if (event.key === 'Enter' || event.keyCode === 13 || event.which === 13)
                 ctrlAddItem();
@@ -127,9 +62,9 @@ var controller = (function (budgetCtrl, UICtrl) {
         document.querySelector(DOMstring.inputType).addEventListener('change', UICtrl.changedType);     
     }
 
-    var updateBudget = function () {
+    const updateBudget = () => {
 
-        var budget;
+        let budget;
         // Calculate budget - budgetController
         budgetCtrl.calculateBudget();
         // Return Budget 
@@ -138,8 +73,8 @@ var controller = (function (budgetCtrl, UICtrl) {
         UICtrl.displayBudget(budget);
     }
 
-    var updatePercentages = function () {
-        var percentages;
+    const updatePercentages =  () => {
+        let percentages;
         // Calculate percentages - budgetController
         budgetCtrl.calculatePercentages();
         // Return percentages
@@ -148,9 +83,9 @@ var controller = (function (budgetCtrl, UICtrl) {
         UICtrl.displayPercentages(percentages);
     }
 
-    var ctrlAddItem = function () {
+    const ctrlAddItem =  () => {
 
-        var input, newItem, types;
+        let input, newItem, types;
         // Get filled input data
         input = UICtrl.getInput();
 
@@ -173,8 +108,8 @@ var controller = (function (budgetCtrl, UICtrl) {
         }
     }
 
-    var ctrlDeleteItem = function (event) {
-        var itemID, splitId, type, ID;
+    const ctrlDeleteItem = (event) => {
+        let itemID, splitId, type, ID;
         itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
         if (itemID) {
             // String and Number have access to method
@@ -182,6 +117,7 @@ var controller = (function (budgetCtrl, UICtrl) {
             // Javascript puts wrapper around them and convert it into Objects
             splitId = itemID.split('-');
             [type,ID] = [...splitId];
+            // Spread Operator and Destructuring
             ID = parseInt(ID);
 
             // Delete item from data - budgetController
@@ -200,7 +136,7 @@ var controller = (function (budgetCtrl, UICtrl) {
     }
 
     return {
-        init: function () {
+        init: () => {
             console.log('Application has started.');
             UICtrl.displayDate();
             UICtrl.displayBudget({
