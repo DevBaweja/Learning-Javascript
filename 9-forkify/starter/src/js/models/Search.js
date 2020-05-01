@@ -19,6 +19,5 @@ export default class Search{
         catch(error){
             alert('Error in Search Query');
         }
-    
     }
 };

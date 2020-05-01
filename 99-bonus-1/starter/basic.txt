@@ -1,0 +1,19 @@
+Node.js is javascript runtime built on chrome's v8 javascript engine
+
+Accessing file system
+Better networking capabilites
+
+Node.js as web server
+Javascript can be used on the server side of web development
+Build fast,highly scalable,network applications (back-end)
+
+Type node in cmd for node environment
+Type .exit to exit
+
+node fileName.js to execute program
+
+npm install nodemon -g
+
+nodemon 
+
+node have very powerful module system
