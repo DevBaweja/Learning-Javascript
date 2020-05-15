@@ -40,7 +40,6 @@ first();
 // Function of event loop - MOnitor message queue and execution stack
 // And put function on execution stack as soon as stack is empty
 
-
 /**********************
  Callback Hell
  */
@@ -254,10 +253,9 @@ jobDone();
 // Post - Send data
 
 // fetch web API(Application Programming Interface)
-// Complex xml HttpRequest interface 
+// Complex xml HttpRequest interface
 
 // Types of API  Own API or 3rd party API
-
 
 // Get back is text based object like in js know as JSON (JavaScript Object Notation)
 // Different is that json is really just single string and not entire object in js engine
@@ -345,9 +343,8 @@ getWeather();
 
 // console.log('Main Function is executing');
 
-
 // Return promise
-// No Access Control Allow Origin 
+// No Access Control Allow Origin
 // Prevent us to make ajax request to domain different that our own domain
 
 // Cross Origin Resource Sharing (CORS)
@@ -359,7 +356,7 @@ getWeather();
 
 // Proxy - crossorigin.me  or cors-anywhere.herokuapp.com
 
-const southAfrica = 'south-africa'
+const southAfrica = 'south-africa';
 const india = 'india';
 // Using promise
 /*
@@ -381,18 +378,32 @@ getCovid(india);
 // Using async/await
 
 async function getCovidAW(country) {
-    const result = await fetch(`https://api.covid19api.com/country/${country}/status/confirmed`)
+    const result = await fetch(`https://api.covid19api.com/country/${country}/status/confirmed`);
     // console.log(result);
 
     const data = await result.json();
     return data;
 }
 
-getCovidAW(india).then(data => {
-    // console.log(data);
-    const today = data[data.length-1];
-    console.log(`Confirmed Cases - ${today.Cases}`);
-})
-.catch(error => {
-    console.log('Error');
-});
+getCovidAW(india)
+    .then((data) => {
+        // console.log(data);
+        const today = data[data.length - 1];
+        console.log(`Confirmed Cases - ${today.Cases}`);
+    })
+    .catch((error) => {
+        console.log('Error');
+    });
+
+    async function getData(input) {
+        const result = await fetch(`url/input`)
+        const data = await result.json();
+        return data;
+    }
+    getData(input)
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.log('Error');
+    });
