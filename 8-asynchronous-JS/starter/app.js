@@ -30,7 +30,7 @@ first();
 
 /*
  Web API
- setTimeout(),DOM events,XMLHttpRequest() for AJAX
+ setTimeout(),DOM events,XMLHttpRequest() for AJAX,Geolocation,localStorage 
  Javascript run time
 
  setTimeout() run on Web API and javascript engine can proceed further
@@ -228,7 +228,8 @@ setTimeout(() => {
 }, 5000);
 // It will return promise as resolved
 */
-
+// Async function always return promise and if we add return then it
+// will resolve promise with returned value
 /*
 getRecipesAW().then(result => {
     console.log(result);
@@ -379,31 +380,31 @@ getCovid(india);
 
 async function getCovidAW(country) {
     const result = await fetch(`https://api.covid19api.com/country/${country}/status/confirmed`);
-    // console.log(result);
-
     const data = await result.json();
     return data;
 }
 
 getCovidAW(india)
-    .then((data) => {
+    .then(data => {
         // console.log(data);
         const today = data[data.length - 1];
         console.log(`Confirmed Cases - ${today.Cases}`);
     })
-    .catch((error) => {
+    .catch(error => {
         console.log('Error');
     });
 
-    async function getData(input) {
-        const result = await fetch(`url/input`)
-        const data = await result.json();
-        return data;
-    }
-    getData(input)
+/*
+async function getData(input) {
+    const result = await fetch(`url/input`);
+    const data = await result.json();
+    return data;
+}
+getData(input)
     .then(data => {
         console.log(data);
     })
     .catch(error => {
         console.log('Error');
     });
+*/

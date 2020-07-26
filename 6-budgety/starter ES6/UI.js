@@ -138,7 +138,7 @@ const UIController = (function () {
 
             document.querySelector(DOMstring.budgetLabel).textContent = (bug>=0? '+':'-')+format(bug);
             document.querySelector(DOMstring.incomeLabel).textContent = '+'+format(totalInc);
-            document.querySelector(DOMstring.expensesLabel).textContent = '-'+format(totalExp);
+            document.querySelector(DOMstring.expensesLabel).textContent = '-'+f ormat(totalExp);
 
             document.querySelector(DOMstring.percentageLabel).textContent = (percentage >= 0 && percentage <= 999) ?
                 percentage + '%' : '---';

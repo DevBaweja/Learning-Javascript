@@ -22,6 +22,17 @@ Inheritance is made possible by prototype property every object ever have.
 Prototype chain is formed
 Object stands as base prototype
 null is only one which have null prototype is therefore final link in prototype chain 
+
+Every js object has prototype property, which make inheritance possible in js
+
+Prototype property of object is where we put methods and properties that
+we want other objects to inherit
+
+The constructor prototype property is not prototype of constructor itself, it is prototype of 
+all instance that are created though the constructor
+
+When certain methods(or properties) are called, search starts in object itself, and if it is not found
+the search moves on to object's prototype. This continues untill method is found. 
 */
 
 /*******************  
@@ -142,7 +153,6 @@ y[2] = 'Teacher';
 
 */
 
-
 /********************
  Object.create
 */
@@ -233,7 +243,7 @@ function branch()
 {}
 branch instanceof Object
 */
-// We can pass function as an argument into another function 
+// We can pass function as an argument into another function
 // We can return function from a function
 
 /**********************
@@ -278,7 +288,6 @@ var rates = genericfn(ages,maxHeartRate);
 var character = genericfn(fullAges,generateCharacter)
 
 */
-
 
 /**********************
     Function returning function as argument
@@ -560,7 +569,6 @@ myEach(years,function(current,index,array){
 });
 */
 
-
 (function () {
     function Question(question, answers, correct) {
         this.question = question;
@@ -570,52 +578,40 @@ myEach(years,function(current,index,array){
 
     Question.prototype.displayQuestion = function () {
         console.log(this.question);
-        for (var i = 0; i < this.answers.length; i++)
-            console.log(i + ': ' + this.answers[i]);
+        for (var i = 0; i < this.answers.length; i++) console.log(i + ': ' + this.answers[i]);
+    };
 
-    }
-
-    Question.prototype.checkAnswer = function (answer,callback) {
+    Question.prototype.checkAnswer = function (answer, callback) {
         var sc;
-        if (answer === this.correct)
-            {
-                console.log('Correct Answer !');
-                sc = callback(true);
-            }
-        else
-           {
-                console.log('Wrong Answer. Try Again :)');
-                sc = callback(false);
-           }
+        if (answer === this.correct) {
+            console.log('Correct Answer !');
+            sc = callback(true);
+        } else {
+            console.log('Wrong Answer. Try Again :)');
+            sc = callback(false);
+        }
         this.displayScore(sc);
-    }
+    };
 
-    Question.prototype.displayScore = function(score)
-    {
-        console.log('Your current score is: '+ score);
+    Question.prototype.displayScore = function (score) {
+        console.log('Your current score is: ' + score);
         console.log('-------------');
-    }
+    };
 
-    var q1 = new Question('Is javascript coolest programming language in the world ?',
-        ['Yes', 'No'], 0);
+    var q1 = new Question('Is javascript coolest programming language in the world ?', ['Yes', 'No'], 0);
 
-    var q2 = new Question('What is the name of this course\'s teacher ?',
-        ['John', 'Micheal', 'Jonas'], 2);
+    var q2 = new Question("What is the name of this course's teacher ?", ['John', 'Micheal', 'Jonas'], 2);
 
-    var q3 = new Question('What does best describe coding ?',
-        ['Boring', 'Hard', 'Fun', 'Tedious'], 2);
+    var q3 = new Question('What does best describe coding ?', ['Boring', 'Hard', 'Fun', 'Tedious'], 2);
 
     var questions = [q1, q2, q3];
 
-    function score()
-    {
+    function score() {
         var sc = 0;
-        return function(correct)
-        {
-            if(correct)
-                sc++;
+        return function (correct) {
+            if (correct) sc++;
             return sc;
-        }
+        };
     }
 
     var keepScore = score();
@@ -628,10 +624,9 @@ myEach(years,function(current,index,array){
         var answer = prompt('Please select correct answer.');
 
         if (answer !== 'exit') {
-            currentQues.checkAnswer(parseInt(answer),keepScore);
+            currentQues.checkAnswer(parseInt(answer), keepScore);
             nextQuestion();
         }
     }
     nextQuestion();
-
-})(); 
+})();

@@ -1,4 +1,3 @@
-
 /******************
     Variables and Datatypes
 
@@ -41,6 +40,8 @@ var johnMark = 'John and Mark';
 // var if = 'if';
 // var delete = 'delete';
 
+delete is used to delete key-value property of object
+
 var a = 10;
 var a = 20;
 // no problem in declaring an variable twice as it is interpreted
@@ -49,13 +50,11 @@ var a = 20;
 // Identifier cannot have reserved js keywords
 */
 
-
-
 /*******************
     Variables Mutation and Type Coercion
 
 
- // Type Coercion
+ // Type Coerc  ion
 var firstName = 'John';
 var age = 28;
 
@@ -76,9 +75,6 @@ var lastName = prompt('What is his last name? ');
 console.log(firstName+' '+lastName);
 
 */
-
-
-
 
 /*******************
  Basic Operators
@@ -123,8 +119,6 @@ console.log(typeof x); // undefined
 
 */
 
-
-
 /******************** 
     Operator Precedence
 
@@ -146,10 +140,121 @@ console.log(average);
 // Multiple Assignment
 var x,y;
 x = y =  (3+5)*4-6; // 8*4-6 // 32-6 // 26
+// Here x will not be undefined as y is not defined at time x = y 
+// However it work just fine due to associativity of assignment operator
 // Assignment operator is from right to left
 
 console.log(x,y); // we can use , in between two variables
 
+// Mostly +,-,*,/ are left to right 
+// 1+2+3 => 3+3 => 6
+// However assignment,conditional is one of them where it is from right to left
+// so y will assign first and then only it will assign x
+
+// Table
+Precedence	Operator type	Associativity	Individual operators
+
+21 
+Grouping n/a (...)
+
+20 
+Member Access left-to-right ... . ... 
+Computed Member Access left-to-right ... [...]
+new (with argument list) n/a new ... (...)
+Function Call left-to-right ... (...)
+Optional Chaining left-to-right ?.
+
+19
+right-to-left
+new (without argument list)	new ...
+
+18	
+n/a
+Postfix Increment ... ++
+Postfix Decrement ... --
+
+17	
+right-to-left
+Logical NOT	! ...
+Bitwise NOT ~ ...
+Unary Plus + ...
+Unary Negation - ...
+Prefix Increment ++ ...
+Prefix Decrement -- ...
+typeof	typeof ...
+void	void ...
+delete	delete ...
+await	await ...
+
+16	
+Exponentiation	right-to-left	... ** ...
+
+15
+left-to-right
+Multiplication ... * ...
+Division ... / ...
+Remainder ... % ...
+
+14
+left-to-right
+Addition ... + ...
+Subtraction	... - ...
+
+13	
+left-to-right
+Bitwise Left Shift	... << ...
+Bitwise Right Shift	... >> ...
+Bitwise Unsigned Right Shift	... >>> ...
+
+12
+left-to-right
+Less Than	... < ...
+Less Than Or Equal	... <= ...
+Greater Than	... > ...
+Greater Than Or Equal	... >= ...
+in	... in ...
+instanceof	... instanceof ...
+
+11
+left-to-right
+Equality ... == ...
+Inequality	... != ...
+Strict Equality	... === ...
+Strict Inequality	... !== ...
+
+10	Bitwise AND	left-to-right	... & ...
+9	Bitwise XOR	left-to-right	... ^ ...
+8	Bitwise OR	left-to-right	... | ...
+7	Nullish coalescing operator	left-to-right	... ?? ...
+6	Logical AND	left-to-right	... && ...
+5	Logical OR	left-to-right	... || ...
+4	Conditional	right-to-left	... ? ... : ...
+3
+right-to-left
+Assignment ... = ...
+... += ...
+... -= ...
+... **= ...
+... *= ...
+... /= ...
+... %= ...
+... <<= ...
+... >>= ...
+... >>>= ...
+... &= ...
+... ^= ...
+... |= ...
+2
+right-to-left
+yield yield ...
+yield*	yield* ...
+
+1
+Comma / Sequence left-to-right ... , ...
+
+
+
+// Using \ to escape characters
 console.log('Is Mark\'s height greater than John\'s ');
 
 // More Operator
@@ -165,7 +270,6 @@ console.log(x);
 
 */
 
-
 /********************
     Challenge
 
@@ -176,7 +280,9 @@ var massJohn = 92;
 var heightJohn = 1.95;
 
 var JohnBMI = massJohn / (heightJohn*heightJohn);
+var JohnBMI= massJohn / (heightJohn ** 2);
 var MarkBMI = massMark / (heightMark*heightMark);
+var MarkBMI= massJohn / (heightMark ** 2);
 
 console.log(JohnBMI);
 console.log(MarkBMI);
@@ -271,6 +377,27 @@ switch (job) {
             console.log(firstName + ' does something else');
         }
 }
+switch (job) {
+    case 'teacher' || 'instructor' :
+        {
+            console.log(firstName + ' teaches kids');
+        }
+        break;
+    case 'driver':
+        {
+            console.log(firstName + ' drives');
+        }
+        break;
+    case 'teacher': // FIRST one will be executed no error
+        {
+            console.log(firstName + ' copy techer');
+        }
+        break;
+    default:
+        {
+            console.log(firstName + ' does something else');
+        }
+}
 
 var firstName = 'John';
 var age = 16;
@@ -346,7 +473,7 @@ else
 
 var string = '20';
 var num = 20;
-
+    
 if(string==num)
 {
     console.log('IF Block in ==');
@@ -383,7 +510,6 @@ switch(true)
 //     console.log('Marry');
 
 */
-
 
 /********************
     Function
@@ -465,8 +591,6 @@ console.log(age);
 // Due to call by reference value of age is remain unchanged
 
 */
-
-
 
 /********************
     Funtion Statement and Expressions
@@ -558,8 +682,6 @@ console.log(isDesigner);
 
 */
 
-
-
 /********************
         Challenge
 
@@ -593,8 +715,6 @@ console.log(finalAmount);
 
 */
 
-
-
 /**********************
     Objects And its properties
 
@@ -620,7 +740,7 @@ var x = 'birthYear';
 console.log(john[x]);
 
 console.log(john.family.push('Wilie'));
-console.log(john.family);
+console.log(j{ohn.family});
 
 john.job = 'Designer';
 john['isMarried'] = true;
@@ -657,7 +777,6 @@ console.log(john);
 
 */
 
-
 /********************
     Challenge
 
@@ -668,6 +787,7 @@ var john = {
     height : 1.95,
     calcBMI : function(){
         this.bmi = this.mass/(this.height*this.height);
+        return this.bmi;
     }
 }
 
@@ -677,16 +797,15 @@ var mark = {
     height : 1.69,
     calcBMI : function(){
         this.bmi = this.mass/(this.height*this.height);
+        return this.bmi;
     }
 }
 
-john.calcBMI();
-mark.calcBMI();
 console.log(john,mark);
 
 switch(true)
 {
-    case(john.bmi>mark.bmi):
+    case(john.calcBMI()>mark.calcBMI()):
             console.log(john.fullName+' have higher bmi '+(john.bmi-mark.bmi));
         break;
     case(john.bmi<mark.bmi):
@@ -735,8 +854,6 @@ for (var i = john.length - 1; i >= 0; i--) {
     console.log(john[i]);
 }
 */
-
-
 
 /********************
     Challenge
@@ -853,4 +970,30 @@ console.log(john.average,mark.average);
 var out = (john.average>mark.average)? john.fullName+' family pays higher' : mark.fullName+' family pays higher';
 console.log(out);
 
-*/  
+*/
+/***************************
+Javascript Version
+
+Changed from LiveScript to JavaScript to attract Java Developers
+
+ES1(ECMA Script 1) became first version of JavaScript language standard
+ECMAScript - The language standard
+JavaScript - The language in practice
+
+ES5
+ES6 / ES2015
+Changed to annual release cycle
+
+ES2016,ES2017 and so on
+
+
+ES5
+Fully supported in all browsers
+Ready to be used today
+
+ES6,ES7,ES8
+Transpiling and Polyfilling
+
+ES9,ES10
+ESNext
+*/

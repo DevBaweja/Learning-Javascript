@@ -5,7 +5,7 @@
 // Codesplitting,Loading menu types of asset like sass or images
 // Decreasing js bundle size using algorithm called tree shaking
 
-// Babel 
+// Babel
 // Convert ES6 back to ES5
 
 /*
@@ -38,13 +38,14 @@ External Packages
 
 // type fileName - Display content of that file
 
-// copy fileName directoryName - Copy file 
+// copy fileName directoryName - Copy file
 // move fileName directoryName - Move file
 
 // ALERT - Remove/Delete file permanently
 // rm fileName/directoryName - Remove file
 // del fileName/directoryName - Delete file
 // Difference between rm and del is how they handle directory
+// rmdir /S directoryName - Delete directory
 
 // start fileName - To open it in default application
 
@@ -56,13 +57,13 @@ External Packages
 // node -v  - checking if it is installed
 // npm (Node Package Manager) automatically comes with node
 // npm --version
-// npm -v  - checking if it is installed 
+// npm -v  - checking if it is installed
 
-// Create package.json file 
+// Create package.json file
 // npm init
 
 // Adding node_modules folder in project from package.json file
-// npm install 
+// npm install
 
 // Installing libraries
 // npm install webpack --save-dev
@@ -80,7 +81,7 @@ External Packages
 // Zero Configuration - src/index.js
 // Then dist folder will be created and bundle file in there
 
-// Configuration  
+// Configuration
 
 /******
     Model - View - Controller (MVC)
@@ -88,7 +89,7 @@ External Packages
 
 // ES6
 // Modules
-// Import and Export 
+// Import and Export
 // Default and Named Export
 
 // Default export - Only one things
@@ -110,8 +111,6 @@ console.log(searchView);
 
 console.log(`Using imported function! ${searchView.add(2,3)} and ${searchView.multiply(2,3)} . ${searchView.string})`);
 */
-
-
 
 /********** 
     API Calling
@@ -187,7 +186,6 @@ fetch("https://webknox-recipes.p.rapidapi.com/recipes/cuisine", {
 });
 */
 
-
 // Recipe - Food - Nutrition
 /*
 fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quickAnswer?q=How%20much%20vitamin%20c%20is%20in%202%20apples%253F", {
@@ -209,7 +207,6 @@ fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quick
 });
 */
 
-
 // Recipe - Food - Nutrition
 /*
 async function getResults()
@@ -230,7 +227,6 @@ async function getResults()
 getResults();
 */
 
-
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
@@ -249,6 +245,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
  - Shopping List
  - Liked Recipes
  */
+// React with redux (State Management Libraries)
 const state = {};
 // Testing
 // window.state = state;
@@ -256,13 +253,13 @@ const state = {};
 /**
 Event Listeners
 */
-elements.searchForm.addEventListener('submit', (event) => {
+elements.searchForm.addEventListener('submit', event => {
     event.preventDefault();
     controlSearch();
 });
 
-elements.searchResPages.addEventListener('click', (event) => {
-    const btn = event.target.closest('.btn-inline')
+elements.searchResPages.addEventListener('click', event => {
+    const btn = event.target.closest('.btn-inline');
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto, 10);
         searchView.clearResults();
@@ -270,17 +267,14 @@ elements.searchResPages.addEventListener('click', (event) => {
     }
 });
 
-
 /**
     Search Controller
 */
 const controlSearch = async () => {
-
     // Get query from view
     const query = searchView.getInput();
 
     if (query) {
-
         // New search object and add it to state
         state.search = new Search(query);
 
@@ -296,31 +290,26 @@ const controlSearch = async () => {
             // Render result on UI
             clearLoader();
             searchView.renderResults(state.search.result);
-        }
-        catch (error) {
+        } catch (error) {
             console.log('Error processing search!');
             clearLoader();
         }
     }
 };
 
-
 /**
     Recipe Controller
 */
 const controlRecipe = async () => {
-
     // Get id from url
     const id = window.location.hash.replace('#', '');
     if (id) {
-
         // Prepare UI for changes
         recipeView.clearRecipe();
         renderLoader(elements.recipe);
 
-        // Highlight selected 
-        if (state.search)
-            searchView.highlightSelected(id);
+        // Highlight selected
+        if (state.search) searchView.highlightSelected(id);
 
         //  Create new Recipe object
         state.recipe = new Recipe(id);
@@ -336,13 +325,9 @@ const controlRecipe = async () => {
 
             // Render recipe
             clearLoader();
-            recipeView.renderRecipe(
-                state.recipe,
-                state.likes.isLiked(id)
-            );
+            recipeView.renderRecipe(state.recipe, state.likes.isLiked(id));
             // console.log(state.recipe);
-        }
-        catch (error) {
+        } catch (error) {
             alert('Error processing recipe !');
             clearLoader();
         }
@@ -357,15 +342,14 @@ const controlRecipe = async () => {
 
 const controlList = () => {
     // Create new list if there is none yet
-    if (!state.list)
-        state.list = new List();
+    if (!state.list) state.list = new List();
 
-    // Add each ingredient to list and UI 
+    // Add each ingredient to list and UI
     state.recipe.ingredients.forEach(cur => {
         const item = state.list.addItem(cur);
         listView.renderItem(item);
     });
-}
+};
 
 // Handle delete and update list item events
 elements.shopping.addEventListener('click', event => {
@@ -384,8 +368,7 @@ elements.shopping.addEventListener('click', event => {
         if (val >= 0) {
             // Update in state
             state.list.updateCount(id, val);
-        }
-        else {
+        } else {
             // Update in UI
             event.target.value = 0;
         }
@@ -397,8 +380,7 @@ elements.shopping.addEventListener('click', event => {
 */
 
 const controlLike = () => {
-    if (!state.likes)
-        state.likes = new Likes();
+    if (!state.likes) state.likes = new Likes();
     const currentID = state.recipe.id;
 
     if (!state.likes.isLiked(currentID)) {
@@ -412,15 +394,13 @@ const controlLike = () => {
 
         // Add like to UI List
         likesView.renderLike(newLike);
-    }
-    else {
+    } else {
         // User has liked current recipe before
 
         // Remove like from state
-        state.likes.deleteLike(currentID)
+        state.likes.deleteLike(currentID);
         // Toggle like button
         likesView.toggleLikeBtn(false);
-
 
         // Remove like from UI List
         likesView.deleteLike(currentID);
@@ -431,7 +411,6 @@ const controlLike = () => {
 
 // Restore liked recipe on page load
 window.addEventListener('load', () => {
-
     state.likes = new Likes();
 
     // Restore likes
@@ -446,7 +425,6 @@ window.addEventListener('load', () => {
 
 // Handling recipe buttons clicks
 elements.recipe.addEventListener('click', event => {
-
     if (event.target.matches('.btn-decrease,.btn-decrease *')) {
         // Decrease button is clicked
         if (state.recipe.servings > 1) {

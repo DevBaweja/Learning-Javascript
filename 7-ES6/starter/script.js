@@ -20,7 +20,6 @@ Promise
 Native modules
 */
 
-
 /**********************
 let and const
 */
@@ -233,7 +232,6 @@ console.log(`${firstName} `.repeat(2));
     Arrow Function
 */
 
-
 // ES5
 /*
 const years = [2000,2005,1998,2010,1999];
@@ -271,7 +269,7 @@ ages6 = years.map((current,index,array) => {
  
 */
 // Unlike normal function arrow function don't get their own this keyword
-// Uses this keyword in which they are written in  
+// Uses this keyword in which they are written in
 // Lexical this variable
 
 // ES5
@@ -344,7 +342,6 @@ const box6 = {
 box6.clickMe();
 */
 
-
 /*
 // ES5
 function Person(name){
@@ -361,7 +358,8 @@ Person.prototype.myFriends5 = function(friends){
 
 var friends = ['Bob','Jane','Mark'];
 new Person('John').myFriends5(friends);
-
+// Bind make copy of function while call calls it immediately
+// Arrow function can be done by bind in ES5
 
 // ES6
 Person.prototype.myFriends6 = function(friends){
@@ -441,7 +439,6 @@ boxesArrays6.forEach(current => {
 });
 */
 // In forEach  and map we cannot break or continue
-
 
 // ES5
 /*
@@ -559,8 +556,7 @@ calculateAge5(2008,2000,1965,2010);
 calculateAge5(2008,2000,1965,2010,2002);
 */
 
-
-// ES6 
+// ES6
 /*
 function calculateAge6(...years){
     years.forEach(year => {
@@ -575,7 +571,6 @@ calculateAge6(2008,2000,1965,2010,2002);
 
 // Spread Operator- Function call
 // Rest Parameters- Function argument
-
 
 // var cyear = new Date().getFullYear();
 
@@ -612,7 +607,6 @@ function showAllFriends(...friends){
 showAllFriends(...friend);
 */
 
-
 /********************
     Default Parameters
 */
@@ -622,7 +616,6 @@ showAllFriends(...friend);
 // Default Parameter
 // When we want one or more parameters to be preset
 // we want them to have default value
-
 
 // ES5
 /*
@@ -643,7 +636,6 @@ var john = new SmithPerson('John',1990);
 var mike = new SmithPerson('Mike',1986,undefined,'American');
 var emily = new SmithPerson('Emily',1983,'Diaz','Spanish');
 */
-
 
 // Using bind
 /*
@@ -714,6 +706,7 @@ question.has('correct'); // return true or false
 // question.clear();
 
 // Iterate over map
+// Similar to array
 // question.forEach((value,key,map)=> console.log(`This is ${key} and set to ${value}`));
 
 /*
@@ -721,14 +714,24 @@ for (var entry of question) {
     console.log(entry);
 }
 */
-// It return key,value pair so we need to destructure it 
+// It return key,value pair so we need to destructure it
 /*
 question.entries(); // gives us map iterator to iterate map
+// This kind of destructuring can also be applied to Array 
+// Again using entries to get Array Iterator
 for(let [key,value] of question.entries()){
     console.log(`This is ${key} and set to ${value}`);
 }
-*/
 
+// To iterate over object we need 
+Object.values(obj)
+
+Object.assign(obj) 
+// This is used to for assigning one obj to another obj 
+// Which can also be done by spread operator 
+
+obj.valueOf()
+*/
 
 // Putting it all together
 /*
@@ -747,7 +750,6 @@ console.log(question.get(result));
 // (key instanceof Number)  Nothing as Number are primitives
 // We can also use ans1,ans2.. as answser and loop over with includes(ans)
 */
-
 
 /**********************
     Classes
@@ -791,7 +793,9 @@ class Person6 {
         console.log('Hey There');
     }
 }
-// no function keyword
+// no function keyword, no separate commas like in object, no semicolon like in function declaration
+// Also function created using class  will be function declaration and not arrow function 
+// so that this point to object or instance of class
 
 const john = new Person6('John',1990,'teacher');
 john.calculateAge();
@@ -804,7 +808,6 @@ Person6.greeting();
 // Person6.prototype.lastName = 'Smith';
 // We can only add method to classes and not properties
 // like we can do it in function constructor prototype property
-
 
 /**********************
     Classes and Inheritance
@@ -885,7 +888,6 @@ const johnAthlete6 = new Athlete6('John',1990,'swimmer',3,10);
 johnAthlete6.calculateAge();
 johnAthlete6.wonMedal();    
 */
-
 
 /**********************
     Coding Challenge
@@ -1053,7 +1055,7 @@ john.displayName();
 //                     console.log(this);
 //                     // It belong to element h1 or window
 //                 });
-                
+
 //         */
 
 //         /*
@@ -1066,7 +1068,6 @@ john.displayName();
 //     }
 // }
 // john.displayName();
-
 
 // const mike = {
 //     name: 'Mike',

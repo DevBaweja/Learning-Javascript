@@ -1,23 +1,45 @@
 /***********************
     Execution Context
 
+Engines
+V8 of Google Chrome
+V8 is a staple in both the Chrome browser and the Node. js JavaScript runtime.
+WebAsembly is also supported in Mozilla Firefox, Apple Safari, and Microsoft Edge
+SpiderMonkey is Mozilla's JavaScript engine written in C and C++
+JavaScriptCore is Apple's engine for its Safari browser
+Chakra is a JavaScript engine developed by Microsoft for its Microsoft Edge web browser. It is a fork of the JScript engine used in Internet Explorer
 
 Parser -- Abstract Syntax Tree
 Execution Context 
+A box, or container or wrapper which stores variables and piece of our code is evaluated and executed
 
+Default execution context is
 Global Execution Context(Global Object - window)
+this.variable === window.variable Associated with global window object
+
 Every function make their own execution context
 
 Execution Context Object 
-1. Variable Object (variable declaration,function declaration)
+1. Variable Object (variable declaration,function declaration,function arguments)
 2. Scope Chain (Current variable object as well as of all their parent)
 3. This variable
+
+Two phases
+
+Creation Phase 
+    Creation of variable object
+    Creation of scope chain
+    Determine value of this variable 
+Execution Phase 
+    The code of function that generated the current execution context
 
 Variable Object
     1. Argument object is created, containing all the argument that were passed into function
     2. Function Declarations,for each funciton,a property is created in variable object, pointing to the function 
     3. Variable Declaration, for each variable,a property is created in variable object, and set to undefined
 In One Word,Hoisting ie all the variable and function are available before execution even starts
+However there is difference between hoisting of variables and functions
+Function are actually defined before execution phase starts however Variables are set to undefined and will only be defined in execution phase
 
 Scoping Chain 
     1. Where can be access this particular function in code
@@ -94,12 +116,13 @@ console.log(age);
 
 */
 
-
 /*
 ///////////////////////////////////////
 // Lecture: Scoping
 
-
+Scope can be created by if else, for, while and anything that have block but not in JS
+JS to create new scope we need function
+Lexical Scoping - Function that is lexical within another function gets access to scope of outer function
 // First scoping example
 
 
@@ -117,7 +140,7 @@ if (true) {
 console.log(count);
 // Since it have access to if-block variables
 // So it will be redefined 
-
+// However in function we will get new scope
 
 
 // Simple Lexical Scoping
@@ -189,7 +212,6 @@ function third() {
 // first
 // Global Execution context
 
-
 // Scope Chain (Order in which funcitons are written lexically)
 // Global - a(Global),first(),third()
 // first - a(Global),(No Lexical),b(self),first(),second(),third()
@@ -198,7 +220,6 @@ function third() {
 
 // here in case of functions we can say that first() and third() are in global execution context
 // while second() is in first() execution context so second() can be called only on first() execution
-
 
 ///////////////////////////////////////
 // Lecture: The this keyword

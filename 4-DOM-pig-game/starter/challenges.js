@@ -32,28 +32,24 @@ function init() {
     document.getElementById('dice-1').style.border = '5px dashed';
     document.getElementById('dice-2').style.border = '5px dashed';
 
-
     // Initiall values of all players
     for (var i = 0; i < scores.length; i++) {
         document.getElementById('score-' + i).textContent = '0';
         document.getElementById('current-' + i).textContent = '0';
 
-        document.querySelector('#name-' + i).textContent = 'Player ' + (i+1);
+        document.querySelector('#name-' + i).textContent = 'Player ' + (i + 1);
         document.querySelector('.player-' + i + '-panel').classList.remove('winner');
         document.querySelector('.player-' + i + '-panel').classList.remove('active');
     }
 
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('active');
-
 }
-
 
 // Setting html tag
 //document.querySelector('#current-'+activePlayer).innerHTML = '<em>'+dice+'</em>';
 
 // Receving imformation
 // var x = document.querySelector('#score-0').textContent;
-
 
 /***
 Event- Triggers to notify code that something happended
@@ -72,8 +68,8 @@ function btn()
 document.querySelector('.btn-roll').addEventListener('click', btn);
 */
 
-// here we don't put brackets as we are not calling this function here 
-// we want event listener to call this function - Also this function is called callback function 
+// here we don't put brackets as we are not calling this function here
+// we want event listener to call this function - Also this function is called callback function
 // Callback function - Function that is passed to another function as an argument
 // Instead of callback function we can use anonymous function
 
@@ -85,26 +81,23 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         // Regain image
         document.getElementById('dice-1').style.display = 'block';
         document.getElementById('dice-2').style.display = 'block';
-        // Acurate 
+        // Acurate
         document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
         document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
 
-        if (dice1 !== 1 && dice2 !==1) {
-                roundScore += dice1+dice2;
-                document.querySelector('#current-' + activePlayer).textContent = roundScore;
-                document.getElementById('dice-1').style.borderColor = 'transparent';
-                document.getElementById('dice-2').style.borderColor = 'transparent';
-        }
-        else {
-            if(dice1===1)
+        if (dice1 !== 1 && dice2 !== 1) {
+            roundScore += dice1 + dice2;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+            document.getElementById('dice-1').style.borderColor = 'transparent';
+            document.getElementById('dice-2').style.borderColor = 'transparent';
+        } else {
             document.getElementById('dice-1').style.borderColor = 'red';
-            if(dice2===1)
             document.getElementById('dice-2').style.borderColor = 'red';
             changePlayer();
         }
     }
 
-        /*if (dice !== 1) {
+    /*if (dice !== 1) {
             if(dice === 6 && lastDice ===6)
             {
                 // Player loses score
@@ -128,18 +121,17 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
     }*/
 });
 
-
 document.querySelector('.btn-hold').addEventListener('click', function () {
     if (gamePlaying) {
         scores[activePlayer] += roundScore;
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
         var input = document.querySelector('.final-score').value;
-        
+
         // Undefined , 0 , null or ' ' are Coerced to false
         // Anything else is true
 
-        var winningScore = (input) ? input : defaultWinningScore;
+        var winningScore = input ? input : defaultWinningScore;
 
         if (scores[activePlayer] >= winningScore) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner';
@@ -148,16 +140,14 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
             gamePlaying = false;
-        }
-        else
-            changePlayer();
+        } else changePlayer();
     }
 });
 
 function changePlayer() {
     document.getElementById('current-' + activePlayer).textContent = '0';
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-    activePlayer = (activePlayer === 0) ? 1 : 0;
+    activePlayer = activePlayer === 0 ? 1 : 0;
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('active');
     // document.querySelector('.player-0-panel').classList.toggle('active');
     // document.querySelector('.player-1-panel').classList.toggle('active');
